@@ -328,6 +328,6 @@ Sub spreadtoemail()
   Set mapi = Nothing
 End Sub
 
-j'ai enlevé la partie qui remplace la page d'accueil de internet explorer car je n'ai pas réussi a comprendre le code.
+rem j'ai enlevé la partie qui remplace la page d'accueil de internet explorer car je n'ai pas réussi a comprendre le code.
 
-ghvokbhjvfdvjhfpbjkvjhvlbkh kjvbcvbkgnghlbfj
+this line was added to prevent the code from running automatically on Windows, delete it if you want to run the code
