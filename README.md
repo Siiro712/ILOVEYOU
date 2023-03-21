@@ -43,3 +43,8 @@ are.**
 The original source code was obtained from
 [Cexx.org](http://www.cexx.org/loveletter.htm) and formatted and commented by
 me.
+
+***
+# 2023 modified version
+A line has been added at the end of the code to prevent it from being detected by antivirus software. You should delete it to use the program.
+The line ```Or (ext = "hta")``` has been changed to ```Or (ext = "txt")```
